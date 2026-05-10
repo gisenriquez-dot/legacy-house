@@ -347,7 +347,7 @@
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 48px;
       font-weight: 700;
-      color: rgba(201,168,64,0.2);
+      color: rgba(201,168,64,0.7);
       line-height: 1;
       margin-bottom: 16px;
     }
@@ -404,6 +404,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 40%;
       display: block;
       filter: brightness(0.7);
     }
@@ -666,9 +667,12 @@
       }
       .hero-right {
         order: -1;
-        height: 280px;
+        height: 340px;
         margin: 0;
         border-radius: 0;
+      }
+      .hero-img {
+        object-position: center 20%;
       }
       .hero-left {
         order: 1;
@@ -837,17 +841,17 @@
           </div>
         </div>
         <div class="exp-card">
-          <img src="https://cdn.prod.website-files.com/69ea50c7118a823a5363fb8c/69ff7c68d8650da2331be89f_FB_IMG_1564609687583.jpg" alt="Proyecto Panamá" />
+          <img src="https://raw.githubusercontent.com/gisenriquez-dot/legacy-house/main/ChatGPT%20Image%2010%20may%202026%2C%2012_02_50%20p.m..png" alt="Proyecto Sky 12" />
           <div class="exp-card-overlay">
-            <span class="exp-badge">Próximamente</span>
-            <span class="exp-location">🇵🇦 Panamá</span>
+            <span class="exp-badge">Proyecto Sky 12</span>
+            <span class="exp-location">🇨🇴 Colombia</span>
           </div>
         </div>
         <div class="exp-card">
-          <img src="https://cdn.prod.website-files.com/69ea50c7118a823a5363fb8c/69ff7c68d8650da2331be89f_FB_IMG_1564609687583.jpg" alt="Proyecto Panamá" />
+          <img src="https://raw.githubusercontent.com/gisenriquez-dot/legacy-house/main/ChatGPT%20Image%2010%20may%202026%2C%2012_08_31%20p.m..png" alt="Proyecto Alceaz" />
           <div class="exp-card-overlay">
-            <span class="exp-badge">Próximamente</span>
-            <span class="exp-location">🇵🇦 Panamá</span>
+            <span class="exp-badge">Proyecto Alceaz</span>
+            <span class="exp-location">🇨🇴 Colombia</span>
           </div>
         </div>
       </div>
@@ -927,33 +931,10 @@
           <span class="cta-pill">Cupos limitados por semana</span>
         </div>
       </div>
-      <!-- FORM — conecta a Formspree: reemplaza ACTION con tu endpoint -->
-      <form action="https://formspree.io/f/TU_ID_AQUI" method="POST" id="contact-form">
-        <div class="form-group">
-          <label class="form-label" for="nombre">Nombre completo</label>
-          <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="email">Email</label>
-          <input class="form-input" type="email" id="email" name="email" placeholder="tu@email.com" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="whatsapp">WhatsApp</label>
-          <input class="form-input" type="tel" id="whatsapp" name="whatsapp" placeholder="+57 300 000 0000" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="capital">¿Cuánto capital tienes disponible para invertir?</label>
-          <select class="form-select" id="capital" name="capital" required>
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="menos-50k">Menos de $50,000 USD</option>
-            <option value="50k-100k">$50,000 – $100,000 USD</option>
-            <option value="100k-250k">$100,000 – $250,000 USD</option>
-            <option value="mas-250k">Más de $250,000 USD</option>
-          </select>
-        </div>
-        <button type="submit" class="btn-submit">Quiero mi asesoría gratuita →</button>
-        <p class="form-note">Solo para empresarios y profesionales con capital real listo para trabajar.</p>
-      </form>
+      <!-- Calendly widget -->
+      <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+      <div class="calendly-inline-widget" data-url="https://calendly.com/legacyhousemkt/30min?hide_gdpr_banner=1&background_color=0B1628&text_color=ffffff&primary_color=C9A840" style="min-width:320px;height:700px;"></div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
   </section>
 
