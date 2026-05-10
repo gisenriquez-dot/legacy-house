@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legacy House · Real Estate in Panama</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0B1628;
+      --gold: #C9A840;
+      --gold-light: #d4b44a;
+      --white: #FFFFFF;
+      --gray: rgba(255,255,255,0.65);
+      --navy-soft: rgba(11,22,40,0.65);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── UTILITY ─── */
+    .gold { color: var(--gold); }
+    .serif { font-family: 'Playfair Display', Georgia, serif; }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .divider-gold {
+      width: 48px; height: 2px;
+      background: var(--gold);
+      margin: 20px auto;
+    }
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-diamond {
+      color: var(--gold);
+      font-size: 14px;
+    }
+    .nav-logo-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .nav-logo-sub {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      display: block;
+      margin-top: 1px;
+    }
+    .nav-cta {
+      display: inline-block;
+      padding: 10px 22px;
+      border: 1px solid rgba(201,168,64,0.5);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--navy);
+      overflow: hidden;
+    }
+    .hero-cols {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 48px 60px;
+      gap: 48px;
+    }
+    .hero-left { display: flex; flex-direction: column; gap: 24px; }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--gold);
+    }
+    h1.hero-h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--white);
+    }
+    h1.hero-h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--gray);
+      max-width: 480px;
+    }
+    .hero-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 16px 28px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); }
+    .btn-secondary {
+      display: inline-block;
+      padding: 14px 28px;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1px solid rgba(201,168,64,0.3);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.75);
+    }
+    .pill::before { content: '◆'; font-size: 7px; color: var(--gold); }
+    .hero-right {
+      position: relative;
+      height: 520px;
+    }
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .hero-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(11,22,40,0.3) 0%, transparent 60%);
+    }
+
+    /* ─── STATS BAND ─── */
+    .stats-band {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      background: var(--gold);
+      padding: 24px 48px;
+      position: relative;
+      z-index: 10;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(11,22,40,0.65);
+      margin-top: 4px;
+    }
+    .stat-divider {
+      width: 1px;
+      height: 44px;
+      background: rgba(11,22,40,0.15);
+      align-self: center;
+    }
+
+    /* ─── PAIN SECTION ─── */
+    .pain-section {
+      background: var(--navy);
+      padding: 100px 0;
+    }
+    .pain-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 40px;
+      text-align: center;
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    h2.section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+    .pain-quotes {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: left;
+      margin-bottom: 40px;
+    }
+    .pain-quote {
+      padding: 24px 28px;
+      border-left: 2px solid var(--gold);
+      background: rgba(255,255,255,0.03);
+      font-size: 16px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.85);
+      font-style: italic;
+    }
+    .pain-closer {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--gray);
+    }
+    .pain-closer strong { color: var(--white); font-weight: 600; }
+
+    /* ─── METHOD SECTION ─── */
+    .method-section {
+      background: linear-gradient(180deg, #0d1b2e 0%, #0B1628 100%);
+      padding: 100px 0;
+    }
+    .method-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .method-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .method-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .method-step {
+      padding: 40px;
+      border: 1px solid rgba(201,168,64,0.15);
+      background: rgba(255,255,255,0.02);
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .method-step:hover { border-color: rgba(201,168,64,0.4); }
+    .step-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: rgba(201,168,64,0.2);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .step-desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--gray);
+    }
+
+    /* ─── EXPERIENCIA SECTION ─── */
+    .exp-section {
+      background: var(--white);
+      padding: 100px 0;
+    }
+    .exp-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .exp-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .exp-header .section-eyebrow { color: var(--gold); }
+    .exp-header h2 { color: var(--navy); }
+    .exp-header .divider-gold { margin: 16px auto; }
+    .exp-body {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(11,22,40,0.7);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+    .exp-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .exp-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: #e8e8e8;
+    }
+    .exp-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.7);
+    }
+    .exp-card-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      background: linear-gradient(0deg, rgba(11,22,40,0.8) 0%, transparent 60%);
+    }
+    .exp-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      align-self: flex-start;
+    }
+    .exp-location {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ─── FAQ SECTION ─── */
+    .faq-section {
+      background: var(--navy);
+      padding: 100px 0;
+    }
+    .faq-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .faq-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: left;
+      padding: 24px 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .faq-question::after {
+      content: '+';
+      font-size: 22px;
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-item.open .faq-question::after { transform: rotate(45deg); }
+    .faq-answer {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--gray);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s;
+      padding-bottom: 0;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding-bottom: 24px;
+    }
+
+    /* ─── INVESTMENT SECTION ─── */
+    .invest-section {
+      background: linear-gradient(180deg, #0B1628 0%, #0d1b2e 100%);
+      padding: 100px 0;
+    }
+    .invest-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .invest-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .invest-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .invest-card {
+      border: 1px solid rgba(201,168,64,0.2);
+      background: rgba(255,255,255,0.02);
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 32px;
+    }
+    .invest-badge {
+      display: inline-block;
+      padding: 5px 12px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .invest-loc {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--gray);
+    }
+
+    /* ─── CTA / FORM SECTION ─── */
+    .cta-section {
+      background: var(--navy);
+      padding: 100px 0;
+      border-top: 1px solid rgba(201,168,64,0.15);
+    }
+    .cta-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .cta-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .cta-header h2 { margin-bottom: 24px; }
+    .cta-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 24px;
+      text-align: left;
+      display: inline-block;
+    }
+    .cta-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+    .cta-pill::before { content: '◆'; color: var(--gold); font-size: 8px; }
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-input::placeholder { color: rgba(255,255,255,0.3); }
+    .form-input:focus, .form-select:focus { border-color: var(--gold); }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A840' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+    .form-select option { background: var(--navy); color: var(--white); }
+    .form-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      text-align: center;
+      margin-top: 12px;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 18px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--gold-light); }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: #060e1c;
+      padding: 48px 40px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 12px;
+    }
+    .footer-wa {
+      font-size: 13px;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    .footer-wa:hover { text-decoration: underline; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      .nav { padding: 24px; justify-content: center; }
+      .nav-cta { display: none; }
+      .nav-logo-text { text-align: center; }
+
+      .hero-cols {
+        grid-template-columns: 1fr;
+        padding: 0 0 40px;
+        gap: 0;
+      }
+      .hero-right {
+        order: -1;
+        height: 280px;
+        margin: 0;
+        border-radius: 0;
+      }
+      .hero-left {
+        order: 1;
+        padding: 32px 24px 0;
+        align-items: center;
+        text-align: center;
+      }
+      .hero-tag::before { display: none; }
+      .hero-sub { text-align: center; }
+      .hero-btns { width: 100%; }
+      .btn-primary, .btn-secondary { width: 100%; }
+      .hero-pills { justify-content: center; }
+
+      .stats-band {
+        padding: 6px 8px;
+        grid-column-gap: 6px;
+      }
+      .stat-num { font-size: 13px; }
+      .stat-label { font-size: 6px; letter-spacing: 0.03em; }
+      .stat-item { padding: 0; gap: 1px; }
+      .stat-divider { height: 20px; }
+
+      .method-steps { grid-template-columns: 1fr; gap: 16px; }
+      .method-step { padding: 28px 24px; }
+
+      .exp-cards { grid-template-columns: 1fr; gap: 16px; }
+      .invest-cards { grid-template-columns: 1fr; gap: 16px; }
+
+      .container, .method-inner, .exp-inner, .faq-inner, .invest-inner, .cta-inner, .pain-inner {
+        padding: 0 24px;
+      }
+      .pain-section, .method-section, .exp-section, .faq-section, .invest-section, .cta-section {
+        padding: 72px 0;
+      }
+      h2.section-title { font-size: 28px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-right { height: 240px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-diamond">◆</span>
+      <div>
+        <span class="nav-logo-text">Legacy House</span>
+        <span class="nav-logo-sub">Real Estate in Panama</span>
+      </div>
+    </a>
+    <a href="#formulario" class="nav-cta">Agenda tu asesoría</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-cols">
+      <!-- LEFT -->
+      <div class="hero-left">
+        <span class="hero-tag">Real Estate in Panama · Inversiones para colombianos</span>
+        <h1 class="hero-h1">Convierte tu capital en <em>ingresos en dólares.</em></h1>
+        <p class="hero-sub">Inversión inmobiliaria en Panamá con estructura legal y gestión completa.</p>
+        <div class="hero-btns">
+          <a href="#formulario" class="btn-primary">Quiero mi asesoría gratuita de 30 min →</a>
+          <a href="#metodo" class="btn-secondary">Conocer El Método Legacy House</a>
+        </div>
+        <div class="hero-pills">
+          <span class="pill">Sin comisiones ocultas</span>
+          <span class="pill">Sin presión de cierre</span>
+          <span class="pill">Con estrategia real</span>
+        </div>
+      </div>
+      <!-- RIGHT / IMAGE -->
+      <div class="hero-right">
+        <img class="hero-img" src="https://cdn.prod.website-files.com/69ea50c7118a823a5363fb8c/69f3f49a45459e4a60476b7a_lh_team_clean.jpg" alt="Equipo Legacy House" />
+        <div class="hero-img-overlay"></div>
+      </div>
+    </div>
+
+    <!-- STATS BAND -->
+    <div class="stats-band">
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Proceso guiado</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">$0</span>
+        <span class="stat-label">Sin inventario propio</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">30 min</span>
+        <span class="stat-label">Asesoría gratuita</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN SECTION -->
+  <section class="pain-section">
+    <div class="pain-inner">
+      <p class="section-eyebrow">Por qué aún no has actuado</p>
+      <h2 class="section-title">No es falta de información.<br>Es falta de alguien en quien <em style="font-style:normal;color:var(--gold)">confiar.</em></h2>
+      <p class="section-sub">Ya generas dinero. El problema es decidir dónde ponerlo sin cometer un error.</p>
+      <div class="pain-quotes">
+        <blockquote class="pain-quote">"El problema no es empezar. Es equivocarte."</blockquote>
+        <blockquote class="pain-quote">"Todos prometen rentabilidad. ¿Pero quién responde si algo sale mal?"</blockquote>
+        <blockquote class="pain-quote">"No tengo tiempo de analizar proyectos, hacer due diligence y entender leyes de otro país."</blockquote>
+        <blockquote class="pain-quote">"Te da miedo entrar justo antes de que el mercado caiga."</blockquote>
+      </div>
+      <p class="pain-closer">Eso no es falta de valentía. <strong>Es falta de un sistema claro y de alguien que te acompañe de verdad.</strong></p>
+    </div>
+  </section>
+
+  <!-- METHOD SECTION -->
+  <section class="method-section" id="metodo">
+    <div class="method-inner">
+      <div class="method-header">
+        <p class="section-eyebrow">El Método Legacy House</p>
+        <h2 class="section-title">No te mostramos proyectos<br>Filtramos <em style="font-style:normal;color:var(--gold)">oportunidades</em></h2>
+        <div class="divider-gold"></div>
+        <p class="section-sub" style="max-width:560px;margin:0 auto;">Tendrás un sistema de inversión inmobiliaria guiada en Panamá, diseñado para empresarios colombianos que quieren certeza, no apuestas.</p>
+      </div>
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Diagnóstico de Capital</h3>
+          <p class="step-desc">Una sesión de 30 minutos. Entendemos cuánto puedes invertir, qué esperas obtener y qué nivel de riesgo realmente toleras.</p>
+        </div>
+        <div class="method-step">
+          <div class="step-num">02</div>
+          <h3 class="step-title">Selección Estratégica</h3>
+          <p class="step-desc">Solo te presentamos proyectos que sobreviven nuestro filtro: rentabilidad real, desarrollador probado, precio justo.</p>
+        </div>
+        <div class="method-step">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Estructura y Ejecución</h3>
+          <p class="step-desc">Abogados, proceso legal, transferencia internacional; coordinado por nosotros. Tú firmas con certeza, no con fe.</p>
+        </div>
+        <div class="method-step">
+          <div class="step-num">04</div>
+          <h3 class="step-title">Gestión y Rentabilidad</h3>
+          <p class="step-desc">Seguimiento real, reportes claros y acompañamiento continuo. Nunca vuelves a sentir que invertiste a ciegas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA SECTION -->
+  <section class="exp-section">
+    <div class="exp-inner">
+      <div class="exp-header">
+        <p class="section-eyebrow">Experiencia</p>
+        <h2 class="section-title" style="color:var(--navy)">EXPERIENCIA Y VISIÓN EN<br>INVERSIÓN INMOBILIARIA</h2>
+        <div class="divider-gold"></div>
+        <p class="exp-body">Más de 10 años desarrollando y analizando proyectos inmobiliarios en Colombia, y 3 años conectando inversionistas con oportunidades estratégicas en Panamá.</p>
+      </div>
+      <div class="exp-cards">
+        <div class="exp-card">
+          <img src="https://cdn.prod.website-files.com/69ea50c7118a823a5363fb8c/69ff7c68d8650da2331be89f_FB_IMG_1564609687583.jpg" alt="Casas inteligentes Colombia" />
+          <div class="exp-card-overlay">
+            <span class="exp-badge">Proyecto</span>
+            <span class="exp-location">🇨🇴 Colombia</span>
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://cdn.prod.website-files.com/69ea50c7118a823a5363fb8c/69ff7c68d8650da2331be89f_FB_IMG_1564609687583.jpg" alt="Proyecto Panamá" />
+          <div class="exp-card-overlay">
+            <span class="exp-badge">Próximamente</span>
+            <span class="exp-location">🇵🇦 Panamá</span>
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://cdn.prod.website-files.com/69ea50c7118a823a5363fb8c/69ff7c68d8650da2331be89f_FB_IMG_1564609687583.jpg" alt="Proyecto Panamá" />
+          <div class="exp-card-overlay">
+            <span class="exp-badge">Próximamente</span>
+            <span class="exp-location">🇵🇦 Panamá</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-header">
+        <p class="section-eyebrow">Preguntas frecuentes</p>
+        <h2 class="section-title">Preguntas que probablemente<br>ya te estás <em style="font-style:normal;color:var(--gold)">haciendo</em></h2>
+        <div class="divider-gold"></div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">¿Y si el proyecto no se valoriza?</button>
+          <div class="faq-answer">Por eso no trabajamos con cualquier proyecto. Solo analizamos oportunidades con demanda real, ubicación estratégica y lógica financiera sólida.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Quién me garantiza que sí renta?</button>
+          <div class="faq-answer">Nadie serio puede garantizar rentabilidad al 100%. Lo que sí garantizamos es transparencia, números reales y un proceso pensado para reducir riesgo, no maquillarlo.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Cómo funciona el tema legal en Panamá?</button>
+          <div class="faq-answer">Panamá tiene una estructura legal favorable para inversionistas extranjeros. Nosotros coordinamos el proceso para que inviertas con claridad, no con dudas.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿No es mejor invertir en Colombia?</button>
+          <div class="faq-answer">Colombia puede seguir siendo parte de tu estrategia. Pero diversificar en dólares reduce exposición local y abre acceso a un mercado más estable.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">¿Esto no es solo venderme un apartamento más?</button>
+          <div class="faq-answer">No vendemos proyectos por vender. Si una inversión no tiene sentido para ti, te lo vamos a decir.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTMENT OPPORTUNITIES -->
+  <section class="invest-section">
+    <div class="invest-inner">
+      <div class="invest-header">
+        <p class="section-eyebrow">Inversiones</p>
+        <h2 class="section-title">OPORTUNIDADES DE<br>INVERSIÓN <em style="font-style:normal;color:var(--gold)">PREMIUM</em></h2>
+        <div class="divider-gold"></div>
+        <p class="section-sub" style="max-width:560px;margin:0 auto;">Descubre nuestro portafolio exclusivo de desarrollos y asegura tu inversión con rendimientos superiores al mercado.</p>
+      </div>
+      <div class="invest-cards">
+        <div class="invest-card">
+          <span class="invest-badge">Próximamente</span>
+          <span class="invest-loc">🇵🇦 Panamá</span>
+        </div>
+        <div class="invest-card">
+          <span class="invest-badge">Próximamente</span>
+          <span class="invest-loc">🇵🇦 Panamá</span>
+        </div>
+        <div class="invest-card">
+          <span class="invest-badge">Próximamente</span>
+          <span class="invest-loc">🇵🇦 Panamá</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / FORM SECTION -->
+  <section class="cta-section" id="formulario">
+    <div class="cta-inner">
+      <div class="cta-header">
+        <p class="section-eyebrow">El momento de actuar</p>
+        <h2 class="section-title">Tu capital no puede seguir esperando el momento <em style="font-style:normal;color:var(--gold)">perfecto.</em></h2>
+        <div class="divider-gold"></div>
+        <p class="section-sub">En esta llamada vamos a revisar tu situación actual, entender tus objetivos y evaluar si Panamá tiene sentido para ti.</p>
+        <div style="display:inline-flex;flex-direction:column;gap:8px;text-align:left;margin-top:8px;">
+          <span class="cta-pill">Sin presión ni técnicas de venta</span>
+          <span class="cta-pill">Diagnóstico honesto de tu situación</span>
+          <span class="cta-pill">Cupos limitados por semana</span>
+        </div>
+      </div>
+      <!-- FORM — conecta a Formspree: reemplaza ACTION con tu endpoint -->
+      <form action="https://formspree.io/f/TU_ID_AQUI" method="POST" id="contact-form">
+        <div class="form-group">
+          <label class="form-label" for="nombre">Nombre completo</label>
+          <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="tu@email.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="whatsapp">WhatsApp</label>
+          <input class="form-input" type="tel" id="whatsapp" name="whatsapp" placeholder="+57 300 000 0000" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="capital">¿Cuánto capital tienes disponible para invertir?</label>
+          <select class="form-select" id="capital" name="capital" required>
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="menos-50k">Menos de $50,000 USD</option>
+            <option value="50k-100k">$50,000 – $100,000 USD</option>
+            <option value="100k-250k">$100,000 – $250,000 USD</option>
+            <option value="mas-250k">Más de $250,000 USD</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">Quiero mi asesoría gratuita →</button>
+        <p class="form-note">Solo para empresarios y profesionales con capital real listo para trabajar.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <span style="color:var(--gold)">◆</span>
+      <span style="font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;">LEGACY HOUSE</span>
+    </div>
+    <p class="footer-tagline">Arquitectos de ingresos pasivos,<br>no vendedores de apartamentos.</p>
+    <p class="footer-copy">© 2026 Legacy House. Todos los derechos reservados.</p>
+    <a href="https://wa.me/573000000000" class="footer-wa" target="_blank">📱 WhatsApp</a>
+  </footer>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
